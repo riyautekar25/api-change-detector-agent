@@ -4,7 +4,6 @@ import os
 
 app = FastAPI()
 
-# Create logs folder if not exists
 os.makedirs("../logs", exist_ok=True)
 
 log_file = os.path.abspath("../logs/api_logs.txt")

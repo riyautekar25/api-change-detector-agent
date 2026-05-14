@@ -17,17 +17,11 @@ logging.basicConfig(
 )
 
 @app.post("/create-order")
-def create_order(
-    order_id: int,
-    item: str,
-    quantity: int
-):
+def create_order(order_id: int, item: str):
 
-    logging.info(
-        f"ORDER API STARTED | order_id={order_id} | item={item} | quantity={quantity}"
-    )
+    logging.info(f"ORDER API STARTED | order_id={order_id} | item={item}")
 
-    # Trigger payment API
+    # Call Payment API
     payment_response = requests.post(
         "http://127.0.0.1:8001/process-payment",
         params={
@@ -42,8 +36,5 @@ def create_order(
 
     return {
         "message": "Order created successfully",
-        "order_id": order_id,
-        "item": item,
-        "quantity": quantity,
         "payment_status": payment_response.json()
     }
